@@ -7,7 +7,7 @@ Control System Course (ENPM667) Final Project
 ### Linearization of the non linear system
 ### LQR Controller
 ### Luenberger Observer
-
+### LQG Controller
 
 ---
 ## Dependecies

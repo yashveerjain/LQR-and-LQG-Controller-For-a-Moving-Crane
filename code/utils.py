@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import os
 
 
-def plot_respone(output_arr, time_steps, N, state, plot_title = "Controller Response", Plot_filename = "Controller Response", image_dir="image", save = False):
+def plot_respone(output_arr, time_steps, N, state, plot_title = "Controller Response", Plot_filename = "Controller Response", image_dir="response_images", save = False):
     os.makedirs(image_dir,exist_ok=True)
     try:
         N_min = min([output_arr.shape[1],N])
