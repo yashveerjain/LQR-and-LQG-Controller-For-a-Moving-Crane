@@ -1,4 +1,4 @@
-# Multi Inverted Cart Problem
+# LQR and LQG Controller For a Moving Crane
 Control System Course (ENPM667) Final Project
 
 ## Overview
