@@ -39,8 +39,8 @@ class Controller:
                 u_temp = 0
             X_states = {dy.x:Y[0],dy.x_dot:Y[1], dy.theta1:Y[2], dy.theta1_dot:Y[3], dy.theta2:Y[4], dy.theta2_dot:Y[5], dy.u:u_temp}
             Y_sym = dy.non_linear_state_space_model(X_states)
-            et = (A@Y[6:]).squeeze()
+            et = (A@Y).squeeze()
             Y_arr = np.array(Y_sym,dtype=np.float32).squeeze()
-            Y_arr = np.hstack([Y_arr,et])
+            Y_arr = np.hstack([Y_arr,et[6:]])
             return Y_arr
         return ode

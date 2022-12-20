@@ -1,7 +1,6 @@
 
-import math
 import sympy 
-from sympy import Matrix, MatrixSymbol, Symbol, symbols, cos, sin, BlockMatrix
+from sympy import Matrix, BlockMatrix
 import numpy as np
 from tqdm import tqdm
 import code.dynamics as dy
@@ -36,8 +35,7 @@ def state_space(A,B,C,K,X_states,state,ue_controller=True):
 
     return output_arr, Ts
 
-def state_space_observer(A,B,C,L,K,X_states,states):
-    total_time = 500
+def state_space_observer(A,B,C,L,K,X_states,states,total_time = 500):
     dt = .01
 
     Ts = np.arange(0,total_time,dt)
@@ -55,7 +53,6 @@ def state_space_observer(A,B,C,L,K,X_states,states):
     C_block_arr = np.array(C_block,dtype=np.float32)
     D_block_arr = np.array(D_block,dtype=np.float32)
     inp = 0
-    non_linear_outputs = []
     all_states = []
     for i in tqdm(Ts):
         u_temp = (optimal_control_input*curr_state)[0]
@@ -64,11 +61,8 @@ def state_space_observer(A,B,C,L,K,X_states,states):
         
         next_state,Y = dy.state_space_model(A_block,B_block,C_block,curr_state,0,dt)    
         curr_state=next_state
-        # print(curr_state)
         output.append(Y)
-        # print(non_linear_output)
-    output_arr = np.array(output,dtype=np.float32).squeeze()
-    # print(non_linear_outputs)
+        
     output_arr = np.array(output,dtype=np.float32).squeeze()
     all_states_arr = np.array(all_states,dtype=np.float32)
     return output_arr, all_states_arr, Ts, (A_block_arr,B_block_arr,C_block_arr,D_block_arr)
